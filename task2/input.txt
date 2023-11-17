@@ -1,1 +1,1 @@
-#include<stdio.h>,int
+#include<stdio.h> ,int, func(1), "abcd", -1, =, < 

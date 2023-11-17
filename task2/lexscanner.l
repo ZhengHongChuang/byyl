@@ -13,7 +13,24 @@ int|double|char {
 "#"[^,]* {
     printf("\n\t%s is a PREPROCESSOR DIRECTIVE", yytext);
 }
+"=" {
+    printf("\n\t%s  is an ASSIGNMENT OPERATOR" ,yytext );
+} 
+\<|\>  {
+    printf("\n\t%s  is an RELATIONAL  OPERATOR" ,yytext );
+}
+-[0-9]+ {
+    printf("\n\t%s is a NUMBER",yytext);
+} 
 , ;
+
+\".*\" {
+    printf("\n\t %s is a STRING",yytext);
+}
+
+func\([0-9a-zA-Z]+\) {
+    printf("\n\tFUNCTION  %s",yytext);
+}
 \n ;
 
 %%
@@ -34,4 +51,5 @@ int main(int argc, char **argv) {
 int yywrap() {
     return 1;
 }
+
 
