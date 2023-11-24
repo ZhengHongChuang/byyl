@@ -1,21 +1,30 @@
 %{
-#include<stdio.h>
+#include <stdio.h>
+int result;
 %}
 
-%token NUM 
-%token ADD 
-%% 
-cmd : NUM ADD NUM{
-printf("%d\n",$1+$3);}
-;
-%% 
-int main() 
-{ 
-yyparse();
- 
-} 
-yyerror(int s) 
-{ 
-printf("%d",s); 
+%token NUM ADD
+
+%%
+expression : NUM
+           | expression ADD expression {
+               $$ = $1 + $3;
+	       result = $$;
+	       $1 = $$;
+           }
+           ;
+%%
+
+int main()
+{
+    yyparse();
+    printf("%d\n",result);
+    return 0;
+}
+
+int yyerror(char *s)
+{
+    printf("%s\n", s);
+    return 0;
 }
 
